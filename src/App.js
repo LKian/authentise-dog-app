@@ -1,28 +1,28 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import SearchForm from "./components/SearchForm";
 import SearchResults from "./components/SearchResults";
 
-function App() {
-  return (
-    <div className="App">
-      <SearchForm />
-      <SearchResults />
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const dogsAll = `https://dog.ceo/api/breeds/list/all`;
 
+// console.log("api ", dogsAll);
+fetch(dogsAll)
+  .then((response) => {
+    return response.json();
+  })
+  .then((data) => {
+    const dogBreed = data.breed;
+    // console.log("dogBreed ", { dogBreed });
+  });
+
+class App extends Component {
+  render() {
+    return (
+      <div className="section">
+        <SearchForm />
+        {/* <SearchResults /> */}
+      </div>
+    );
+  }
+}
 export default App;
