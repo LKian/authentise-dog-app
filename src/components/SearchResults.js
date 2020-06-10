@@ -6,7 +6,7 @@ class SearchResults extends Component {
   render() {
     return (
       <Container maxWidth="lg" className="section">
-        <h2>Results</h2>
+        <h2>Dog List</h2>
       </Container>
     );
   }
