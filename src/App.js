@@ -34,7 +34,8 @@ class App extends Component {
       listOfBreeds: [],
       breed: "",
       listOfBreedImages: [],
-      breedNameError: false,
+      // breedNameError: false,
+      breedNameValid: true,
     };
   }
 
@@ -71,7 +72,7 @@ class App extends Component {
 
     if (this.state.listOfBreeds.includes(this.state.breed) === true) {
       this.setState({
-        breedNameError: false,
+        breedNameValid: true,
         breed: "",
       });
 
@@ -96,7 +97,7 @@ class App extends Component {
       );
     } else {
       this.setState({
-        breedNameError: true,
+        breedNameValid: false,
       });
     }
   };
@@ -116,7 +117,7 @@ class App extends Component {
         <SearchResults
           data={this.state.listOfBreedImages}
           // searchText={this.state.breed}
-          isBreedNameValid={!this.state.breedNameError}
+          breedNameValid={this.state.breedNameValid}
         />
       </div>
     );

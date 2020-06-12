@@ -9,15 +9,17 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 class SearchResults extends Component {
   render() {
-    if (this.props.isBreedNameRight === false) {
-      return <p>Invalid breed</p>;
-    }
     // let dogTitle = this.props.searchText;
     // console.log("dogTitle ", dogTitle);
     return (
       <StyledResults>
         <Container maxWidth="lg" className="section">
-          <Typography variant="h2">Dog List</Typography>{" "}
+          {this.props.breedNameValid === false ? (
+            <Typography className="error-message" variant="caption">
+              Invalid Breed{" "}
+            </Typography>
+          ) : null}
+          <Typography variant="h3">Dog List</Typography>{" "}
           <Grid
             container
             spacing={4}
@@ -25,6 +27,7 @@ class SearchResults extends Component {
             className="search-results-grid"
           >
             {this.props.data.map(function (item) {
+              console.log("line 28: ", item);
               return (
                 <Grid item key={item} className="search-results-card-container">
                   <Card className="search-results-card">
@@ -48,6 +51,11 @@ class SearchResults extends Component {
 }
 
 const StyledResults = styled.div`
+  .error-message {
+    color: red;
+    display: flex;
+    justify-content: center;
+  }
   .search-results-grid {
     display: flex;
   }
