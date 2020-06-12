@@ -115,6 +115,7 @@ class App extends Component {
         />
         <SearchResults
           data={this.state.listOfBreedImages}
+          // searchText={this.state.breed}
           isBreedNameValid={!this.state.breedNameError}
         />
       </div>
