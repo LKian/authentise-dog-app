@@ -33,8 +33,8 @@ class App extends Component {
     this.state = {
       listOfBreeds: [],
       breed: "",
+      searchedBreed: "",
       listOfBreedImages: [],
-      // breedNameError: false,
       breedNameValid: true,
     };
   }
@@ -74,6 +74,7 @@ class App extends Component {
       this.setState({
         breedNameValid: true,
         breed: "",
+        searchedBreed: this.state.breed,
       });
 
       await fetchImages(this.state.breed)
@@ -116,8 +117,9 @@ class App extends Component {
         />
         <SearchResults
           data={this.state.listOfBreedImages}
-          // searchText={this.state.breed}
+          searchText={this.state.breed}
           breedNameValid={this.state.breedNameValid}
+          searchedBreed={this.state.searchedBreed}
         />
       </div>
     );
