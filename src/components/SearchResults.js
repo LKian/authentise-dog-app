@@ -9,8 +9,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 
 class SearchResults extends Component {
   render() {
-    // let dogTitle = this.props.searchText;
-    // console.log("dogTitle ", dogTitle);
     return (
       <StyledResults>
         <Container maxWidth="lg" className="section">
@@ -19,25 +17,21 @@ class SearchResults extends Component {
               Invalid Breed{" "}
             </Typography>
           ) : null}
-          <Typography variant="h3">Dog List</Typography>{" "}
+          <Typography variant="h5">
+            <span>Results:</span> {this.props.searchedBreed}{" "}
+          </Typography>{" "}
           <Grid
             container
             spacing={4}
             justify="center"
             className="search-results-grid"
           >
-            {this.props.data.map(function (item) {
-              console.log("line 28: ", item);
+            {this.props.data.map((item) => {
               return (
                 <Grid item key={item} className="search-results-card-container">
                   <Card className="search-results-card">
                     <Paper elevation={3}>
-                      <CardMedia
-                        className={`item is ${item}`}
-                        component="img"
-                        alt={item}
-                        image={item}
-                      />
+                      <CardMedia component="img" alt={item} image={item} />
                     </Paper>
                   </Card>
                 </Grid>
@@ -58,6 +52,12 @@ const StyledResults = styled.div`
   }
   .search-results-grid {
     display: flex;
+  }
+  h5 {
+    margin: 50px 0;
+  }
+  h5 span {
+    font-weight: 300;
   }
   .search-results-card-container {
     width: 50%;
