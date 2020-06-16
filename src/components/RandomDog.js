@@ -5,6 +5,8 @@ import HelpIcon from "@material-ui/icons/Help";
 
 class RandomDog extends Component {
   render() {
+    const dogName = this.props.data.split("/")[4];
+
     return (
       <StyledRandom>
         <Button onClick={this.props.onClick}>
@@ -13,7 +15,8 @@ class RandomDog extends Component {
             <HelpIcon />
           </Button>
         </Button>
-        <img src={this.props.data}></img>
+        <h3>{dogName}</h3>
+        <img src={this.props.data} alt={dogName}></img>
       </StyledRandom>
     );
   }
