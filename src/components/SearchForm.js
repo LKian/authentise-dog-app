@@ -7,29 +7,26 @@ import { Pets } from "@material-ui/icons";
 class SearchForm extends Component {
   render() {
     return (
-      <StyledForm>
-        <form id="dog-form" onSubmit={this.props.onSubmit}>
-          <TextField
-            id="dog-breed-name"
-            name="dogBreedName"
-            label="Dog Breed Name"
-            value={this.props.searchText}
-            onChange={this.props.handleChange}
-            variant="outlined"
-          />
+      <StyledForm id="dog-form" onSubmit={this.props.onSubmit}>
+        <TextField
+          id="dog-breed-name"
+          name="dogBreedName"
+          label="Dog Breed Name"
+          value={this.props.searchText}
+          onChange={this.props.handleChange}
+          variant="outlined"
+        />
 
-          <Button className="form-submit" type={"submit"}>
-            Submit
-            <Pets className="add-a-dog" />
-          </Button>
-        </form>
+        <Button className="form-submit" type={"submit"}>
+          Submit
+          <Pets className="add-a-dog" />
+        </Button>
       </StyledForm>
     );
   }
 }
 
-const StyledForm = styled.div`
-  #dog-form {
+const StyledForm = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
