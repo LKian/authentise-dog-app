@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import "./App.css";
 import SearchForm from "./components/SearchForm";
 import SearchResults from "./components/SearchResults";
+import RandomDog from "./components/RandomDog";
 
 const URLAllDogBreeds = `https://dog.ceo/api/breeds/list/all`;
 const URLAllDogImages = (breed) => `https://dog.ceo/api/breed/${breed}/images`;
+const URLRandomDog = `https://dog.ceo/api/breeds/image/random`;
 
 // fetch dog breeds from url and grab just keys/breeds
 const fetchBreeds = () =>
@@ -26,6 +28,15 @@ const fetchImages = (breed) =>
       return data;
     });
 
+const fetchRandomBreed = () =>
+  fetch(URLRandomDog)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      return data;
+    });
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +47,7 @@ class App extends Component {
       searchedBreed: "",
       listOfBreedImages: [],
       breedNameValid: true,
+      randomDogURL: "",
     };
   }
 
@@ -79,7 +91,6 @@ class App extends Component {
 
       await fetchImages(this.state.breed)
         .then(function (data) {
-          console.log("Image data: ", data);
           breedImages = data.message;
         })
         .catch(function (err) {
@@ -93,7 +104,7 @@ class App extends Component {
           listOfBreedImages: breedImages,
         },
         () => {
-          console.log("User is searching for: ", this.state);
+          console.log("User is searching for: ", this.state.search);
         }
       );
     } else {
@@ -101,6 +112,20 @@ class App extends Component {
         breedNameValid: false,
       });
     }
+  };
+
+  handleRandom = async () => {
+    let randomDog = "";
+
+    await fetchRandomBreed().then(function (data) {
+      randomDog = data.message;
+    });
+    this.setState({
+      randomDogURL: randomDog,
+    });
+    console.log("THIS ", this.state.randomDogURL);
+
+    // console.log("this is the random's state ", this.state.randomDogURL);
   };
 
   render() {
@@ -121,6 +146,7 @@ class App extends Component {
           breedNameValid={this.state.breedNameValid}
           searchedBreed={this.state.searchedBreed}
         />
+        <RandomDog onClick={this.handleRandom} data={this.state.randomDogURL} />
       </div>
     );
   }
