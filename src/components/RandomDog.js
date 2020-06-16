@@ -7,6 +7,12 @@ class RandomDog extends Component {
   render() {
     const dogName = this.props.data.split("/")[4];
 
+    console.log("data ", dogName);
+    console.log("props ", this.props);
+
+    const dogNameFormatted = dogName != null ? dogName.replace("-", " ") : "";
+    // console.log(dogNameFormatted);
+
     return (
       <StyledRandom>
         <Button onClick={this.props.onClick}>
@@ -15,7 +21,7 @@ class RandomDog extends Component {
             <HelpIcon />
           </Button>
         </Button>
-        <h3>{dogName}</h3>
+        <h3 class="random-dog-title">{dogNameFormatted}</h3>
         <img src={this.props.data} alt={dogName}></img>
       </StyledRandom>
     );
@@ -30,6 +36,9 @@ const StyledRandom = styled.div`
 
   img {
     width: 300px;
+  }
+  .random-dog-title {
+    text-transform: capitalize;
   }
 `;
 
