@@ -6,12 +6,7 @@ import HelpIcon from "@material-ui/icons/Help";
 class RandomDog extends Component {
   render() {
     const dogName = this.props.data.split("/")[4];
-
-    console.log("data ", dogName);
-    console.log("props ", this.props);
-
     const dogNameFormatted = dogName != null ? dogName.replace("-", " ") : "";
-    // console.log(dogNameFormatted);
 
     return (
       <StyledRandom>

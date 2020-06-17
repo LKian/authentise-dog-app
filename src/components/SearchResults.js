@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
+import { Add } from "@material-ui/icons";
 
 class SearchResults extends Component {
   render() {
@@ -29,11 +30,15 @@ class SearchResults extends Component {
             {this.props.data.map((item) => {
               return (
                 <Grid item key={item} className="search-results-card-container">
-                  <Card className="search-results-card">
+                  <Card
+                    className="search-results-card"
+                    onClick={this.props.add}
+                  >
                     <Paper elevation={3}>
                       <CardMedia component="img" alt={item} image={item} />
                     </Paper>
                   </Card>
+                  <Add />
                 </Grid>
               );
             })}
