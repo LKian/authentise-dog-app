@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
+import styled from "styled-components";
 import SearchForm from "./components/SearchForm";
 import SearchResults from "./components/SearchResults";
 import RandomDog from "./components/RandomDog";
+import Reset from "./components/Reset";
 
 const URLAllDogBreeds = `https://dog.ceo/api/breeds/list/all`;
 const URLAllDogImages = (breed) => `https://dog.ceo/api/breed/${breed}/images`;
@@ -48,6 +50,7 @@ class App extends Component {
       listOfBreedImages: [],
       breedNameValid: true,
       randomDogURL: "",
+      currentCollection: [],
     };
   }
 
@@ -87,6 +90,8 @@ class App extends Component {
         breedNameValid: true,
         breed: "",
         searchedBreed: this.state.breed,
+
+        randomDogURL: "",
       });
 
       await fetchImages(this.state.breed)
@@ -122,33 +127,60 @@ class App extends Component {
     });
     this.setState({
       randomDogURL: randomDog,
+      listOfBreedImages: [],
     });
     console.log("THIS ", this.state.randomDogURL);
+  };
 
-    // console.log("this is the random's state ", this.state.randomDogURL);
+  handleAddToCollection = (e) => {
+    let pleaseAdd = e.target.src;
+    this.setState((prevState) => ({
+      currentCollection: [...this.state.currentCollection, pleaseAdd],
+    }));
+    console.log(this.state.currentCollection);
+  };
+
+  handleReset = () => {
+    this.setState((prevState) => ({
+      currentCollection: [],
+      randomDogURL: "",
+      listOfBreedImages: [],
+      searchedBreed: "",
+    }));
   };
 
   render() {
-    console.log("Current search in progress: ", this.state);
-
     return (
-      <div className="section">
-        {/* {this.state.breed != null ? this.state.breed : "breed is null"} */}
-
+      <div>
         <SearchForm
           searchText={this.state.breed}
           onSubmit={this.handleSubmit}
           handleChange={this.handleBreedNameChange}
         />
+
+        <StyledButtons>
+          <RandomDog
+            onClick={this.handleRandom}
+            data={this.state.randomDogURL}
+          />
+          <Reset onClick={this.handleReset} data={this.handleReset} />
+        </StyledButtons>
         <SearchResults
           data={this.state.listOfBreedImages}
           searchText={this.state.breed}
           breedNameValid={this.state.breedNameValid}
           searchedBreed={this.state.searchedBreed}
+          add={this.handleAddToCollection}
         />
-        <RandomDog onClick={this.handleRandom} data={this.state.randomDogURL} />
       </div>
     );
   }
 }
+
+const StyledButtons = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export default App;
